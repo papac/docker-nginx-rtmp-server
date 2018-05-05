@@ -5,15 +5,16 @@
 # ou tout nombre de choses qui vous obligent à accéder à un flux RTMP réel de un serveur RTMP. 
 # Ce guide couvrira les bases de la configuration d'un simple serveur RTMP sur un ordinateur Linux. 
 # Ne vous inquiétez pas, ce n'est pas trop compliqué, mais se familiariser avec Linux vous aidera certainement.
-FROM ubuntu:latest
+FROM ubuntu:xenial
 
 MAINTAINER Papac Dev <dakiafranck@gmail.com>
 
 ENV SRC=/usr/src
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends
 
 # Connectez-vous à votre boîte et assurez-vous d'avoir les outils nécessaires pour compiler nginx en utilisant la commande suivante:
+
 RUN apt-get install build-essential unzip zip libpcre3 libpcre3-dev libssl-dev wget
 
 # Maintenant, un peu d'infos sur nginx (prononcé "moteur-X"). 
@@ -41,7 +42,7 @@ RUN cat ./nginx.conf >> /etc/nginx/nginx.conf
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
 
 # Lancement du serveur
-CMD ['/usr/local/nginx/sbin/nginx', '-s', '-t']
+CMD ['/usr/local/nginx/sbin/nginx']
 
 WORKDIR ['/etc/nginx']
 
