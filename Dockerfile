@@ -15,7 +15,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends
 
 # Connectez-vous à votre boîte et assurez-vous d'avoir les outils nécessaires pour compiler nginx en utilisant la commande suivante:
 
-RUN apt-get install build-essential unzip zip libpcre3 libpcre3-dev libssl-dev wget
+RUN apt-get install \
+	build-essential \
+	unzip zip libpcre3 \
+	libpcre3-dev libssl-dev \
+	wget ffmpeg -y
 
 # Maintenant, un peu d'infos sur nginx (prononcé "moteur-X"). 
 # nginx est un serveur web extrêmement léger, mais quelqu'un a écrit un module RTMP pour cela, donc il peut aussi héberger des flux RTMP. 
@@ -31,7 +35,10 @@ RUN cd $SRC && \
 	unzip master.zip
 
 # Maintenant, nous construisons nginx:
-RUN cd $SRC/nginx-1.13.1 && ./configure --with-http_ssl_module --add-module=../nginx-rtmp-module-master --prefix=/etc/nginx
+RUN cd $SRC/nginx-1.13.1 && \
+	./configure --with-http_ssl_module \
+		--add-module=../nginx-rtmp-module-master \
+		--prefix=/etc/nginx
 
 # Maintenant on lance la compilation et l'installation
 RUN cd $SRC/nginx-1.13.1 && make && make install 
