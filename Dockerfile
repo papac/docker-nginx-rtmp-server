@@ -7,7 +7,7 @@
 # Ne vous inquiétez pas, ce n'est pas trop compliqué, mais se familiariser avec Linux vous aidera certainement.
 FROM ubuntu:xenial
 
-MAINTAINER Papac Dev <dakiafranck@gmail.com>
+LABEL maintainer="Papac Dev <dakiafranck@gmail.com>"
 
 ENV SRC=/usr/src
 
