@@ -44,14 +44,16 @@ RUN cd $SRC/nginx-1.13.1 && \
 RUN cd $SRC/nginx-1.13.1 && make && make install 
 
 # Maintenant on copie la configuration de nginx tout en base
-RUN cat ./nginx.conf >> /etc/nginx/nginx.conf
+RUN cat ./nginx.conf > /etc/nginx/nginx.conf
+COPY --chown=nginx ./hls /var/www
+RUN mkdir -p /videos
 
-VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/html"]
+VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/hls", "/videos"]
 
 # Lancement du serveur
 CMD ['/usr/local/nginx/sbin/nginx']
 
-WORKDIR ['/etc/nginx']
+WORKDIR ['/videos']
 
 # Maintenaint on expose les ports
 EXPOSE 1935/tcp
