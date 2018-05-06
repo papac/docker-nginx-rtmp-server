@@ -5,7 +5,7 @@
 # ou tout nombre de choses qui vous obligent à accéder à un flux RTMP réel de un serveur RTMP. 
 # Ce guide couvrira les bases de la configuration d'un simple serveur RTMP sur un ordinateur Linux. 
 # Ne vous inquiétez pas, ce n'est pas trop compliqué, mais se familiariser avec Linux vous aidera certainement.
-FROM ubuntu:xenial
+FROM ubuntu:latest
 
 LABEL maintainer="Papac Dev <dakiafranck@gmail.com>"
 
@@ -19,7 +19,7 @@ RUN apt-get install \
 	build-essential \
 	unzip zip libpcre3 \
 	libpcre3-dev libssl-dev \
-	wget ffmpeg -y
+	wget libzip-dev ffmpeg -y
 
 # Maintenant, un peu d'infos sur nginx (prononcé "moteur-X"). 
 # nginx est un serveur web extrêmement léger, mais quelqu'un a écrit un module RTMP pour cela, donc il peut aussi héberger des flux RTMP. 
