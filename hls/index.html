@@ -3,8 +3,26 @@
 <head>
 	<title>Ngnix Rtmp server</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<script  type="text/javascript" src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
-	<p>Welcom to the sample rtmp server with nginx</p>
+	<p>{ Welcome to the sample rtmp server with nginx }</p>
+	<video id="video"></video>
+	<script type="text/javascript">
+	  var video = document.getElementById('video');
+	  if(Hls.isSupported()) {
+	    var hls = new Hls();
+	    hls.loadSource('https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8');
+	    hls.attachMedia(video);
+	    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+	      video.play();
+	  });
+	 } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+	    video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+	    video.addEventListener('loadedmetadata',function() {
+	      video.play();
+	    });
+	 }
+	</script>
 </body>
 </html>
