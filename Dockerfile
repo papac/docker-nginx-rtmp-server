@@ -44,8 +44,9 @@ RUN cd $SRC/nginx-1.13.1 && \
 RUN cd $SRC/nginx-1.13.1 && make && make install 
 
 # Maintenant on copie la configuration de nginx tout en base
-RUN cat ./nginx.conf > /etc/nginx/nginx.conf
-COPY --chown=nginx ./hls /var/www
+COPY nginx.conf /tmp
+RUN cat /tmp/nginx.conf > /etc/nginx/nginx.conf
+COPY --chown=www-data hls /var/www
 RUN mkdir -p /videos
 
 VOLUME ["/etc/nginx/sites-enabled", "/etc/nginx/certs", "/etc/nginx/conf.d", "/var/log/nginx", "/var/www/hls", "/videos"]
@@ -57,4 +58,4 @@ WORKDIR ['/videos']
 
 # Maintenaint on expose les ports
 EXPOSE 1935/tcp
-EXPOSE 1935/upd
+EXPOSE 1935/udp
